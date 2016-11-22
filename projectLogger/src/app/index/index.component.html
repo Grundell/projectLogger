@@ -1,0 +1,99 @@
+<p>
+  index works!
+</p>
+
+<div class="ui container">
+    <div *ngFor="let project of (projects | async) " class="">
+      <sm-segment>
+        <div class="ui grid">
+          <div class="row">
+            <div class="eight wide left floated column">
+              <h1 class="ui header">
+                <div class="content">
+                  {{project.title}}
+                  <div class="sub header">
+                    {{project.company}}
+                  </div>
+                </div>
+              </h1>
+            </div>
+            <div class="two wide right floated column">
+              <h3 class="ui header">
+                <div class="sub header">
+                  Status:<i *ngIf="project.approvedBy" class="circle thin big icon green"></i>
+                  <i *ngIf="!project.approvedBy" class="circle circle notched big red icon"></i>
+                </div>
+              </h3>
+            </div>
+          </div>
+          <div class="ten wide column">
+            <div class="ui grid">
+              <div class="four column row">
+                <!-- Dev -->
+                <div class="column">
+                  <h3 class="ui header">
+                    <div class="content">
+                      Development
+                      <div class="sub header">
+                        {{project.type.dev}}
+                      </div>
+                    </div>
+                  </h3>
+                  {{ project?.cost.development.hours * project.cost.development.price | currencySEK}}
+                </div>
+                <!-- SEO -->
+                <div class="column">
+                  <h3 class="ui header">
+                    <div class="content">
+                      SEO
+                      <div class="sub header">
+                        {{project.type.seo}}
+                      </div>
+                    </div>
+                  </h3>
+                  {{ project?.cost.seo.hours * project.cost.seo.price | currencySEK}}
+                </div>
+                <!-- Project  -->
+                <div class="column">
+                  <h3 class="ui header">
+                    <div class="content">
+                      Project
+                      <div class="sub header">
+                        {{project.type.project}}
+                      </div>
+                    </div>
+                  </h3>
+                    {{ project?.cost.project.hours * project.cost.project.price | currencySEK}}
+                </div>
+                <!-- TOTAL -->
+                <div class="column">
+                  <h3 class="ui header">
+                    <div class="content">
+                      Total
+                      <div class="sub header">
+
+                      </div>
+                    </div>
+                  </h3>
+                  {{ (project?.cost.project.hours * project.cost.project.price) +
+                     (project?.cost.development.hours * project.cost.development.price) +
+                     (project?.cost.seo.hours * project.cost.seo.price) | currencySEK
+                   }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="two wide column">
+            <button (click)="navigateSingle(project.$key)" class="ui button basic red"> View </button>
+          </div>
+
+        </div>
+
+
+      </sm-segment>
+      <br/>
+      <br/>
+      <button (click)="postToSlack()" class="ui button basic red"> View </button>
+    </div>
+</div>

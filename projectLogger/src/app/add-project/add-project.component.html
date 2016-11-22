@@ -1,0 +1,186 @@
+<div class="ui container">
+  <p>
+    add-project works!
+  </p>
+  <sm-segment class="padded">
+      <h1>Add new project</h1>
+
+      <form [formGroup]="projectForm" novalidate (ngSubmit)="submit(projectForm.value)" class="ui form">
+        <h4 class="ui dividing header">Project generals</h4>
+        <div class="field">
+           <div class="fields">
+             <div class="six wide field">
+              <label>Name</label>
+               <div class="field">
+                  <input formControlName="title" type="text" placeholder="Project Name">
+                </div>
+                <br/>
+                <div class="field">
+                 <input  formControlName="company" type="text"  placeholder="Company name">
+                </div>
+             </div>
+             <div class="ten wide field" formGroupName="type">
+               <label>Type</label>
+               <div class="field">
+                 <div class="inline fields">
+                     <label>Development type</label>
+                     <div class="field">
+                       <div class="ui radio checkbox">
+                          <input type=radio formControlName="dev" value="Uppdatera Befintlig">
+                          <label> Uppdatera befintlig </label>
+                       </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                         <input type=radio formControlName="dev" value="Ny Sida">
+                         <label> Ny sida</label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                         <input type=radio formControlName="dev" value="A/B testing">
+                         <label> A/B testing</label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                         <input type=radio formControlName="dev" value="No DEV">
+                         <label> No DEV</label>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+               <div class="field">
+                 <div class="inline fields">
+                     <label>SEO</label>
+                     <div class="field">
+                       <div class="ui radio checkbox">
+                          <input type=radio formControlName="seo" value="Web Analys">
+                          <label> Web Analys </label>
+                       </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                         <input type=radio formControlName="seo" value="Offert">
+                         <label> Offert </label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                         <input type=radio formControlName="seo" value="Löpande Avtal">
+                         <label> Löpande Avtal</label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                         <input type=radio formControlName="seo" value="No SEO">
+                         <label> No SEO</label>
+                      </div>
+                    </div>
+                   </div>
+               </div>
+               <div class="field">
+                 <div class="inline fields">
+                     <label>Project type</label>
+                     <div class="field">
+                       <div class="ui radio checkbox">
+                          <input type=radio formControlName="project" value="Flytande Timmar">
+                          <label> Dedikerade Timmar </label>
+                       </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                         <input type=radio formControlName="project" value="Offert">
+                         <label> Offert </label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                         <input type=radio formControlName="project" value="Project 3">
+                         <label> Ej Deffinerat </label>
+                      </div>
+                    </div>
+                   </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         <h4 class="ui dividing header">Description</h4>
+         <div class="field">
+            <div class="two fields">
+              <div class="field">
+                  <label>Project description</label>
+                  <textarea formControlName="description"></textarea>
+              </div>
+              <div class="field"  formGroupName="cost">
+                <!-- DEV COSTS -->
+                  <div class="field ">
+                    <label>Development Costs</label>
+                    <div class="two fields" formGroupName="development">
+                      <div class="field">
+                        <input formControlName="price" name="dev-cost" placeholder="Development cost /h">
+                      </div>
+                      <div class="field">
+                        <input formControlName="hours" placeholder="Development time /h">
+                      </div>
+                    </div>
+                  </div>
+                <!-- Project Cost -->
+                <div class="field">
+                  <label>Project Costs</label>
+                  <div class="two fields"  formGroupName="project">
+                    <div class="field">
+                      <input formControlName="price" placeholder="Proect cost /h">
+                    </div>
+                    <div class="field">
+                      <input formControlName="hours" placeholder="Project time /h">
+                    </div>
+                  </div>
+                </div>
+                <!-- SEO Cost -->
+                <div class="field">
+                  <label>SEO Costs</label>
+                  <div class="two fields"  formGroupName="seo">
+                    <div class="field">
+                      <input  formControlName="price" placeholder="SEO cost /h">
+                    </div>
+                    <div class="field">
+                      <input formControlName="hours" placeholder="SEO time /h">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+         </div>
+         <!-- Files -->
+         <h4 class="ui dividing header">Files</h4>
+         <div class="three fields">
+           <div class="field">
+             <label> Offert Web </label>
+              <input type="file" >
+           </div>
+           <div class="field">
+             <label> Offert SEO </label>
+              <input type="file" name="file" >
+           </div>
+           <div class="field">
+             <label> Offert Löpande SEO </label>
+              <input type="file" >
+           </div>
+
+         </div>
+         <div class="field">
+           <div class="ui basic clearing segment">
+              <button type="submit" class="ui right floated button basic green"> Submit </button>
+            </div>
+       </div>
+      </form>
+  </sm-segment>
+
+  <sm-segment>
+     <pre>form value: <br>{{ projectForm.value | json}}</pre>
+  </sm-segment>
+
+</div>

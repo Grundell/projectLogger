@@ -1,0 +1,54 @@
+<div *ngIf="af.auth | async">
+  <sm-sidebar class="left visible vertical inverted sidebar labeled icon menu" #invertedSidebar>
+      <a  routerLink="/index"  class="item" >
+          <i class="home icon"></i> Home
+      </a>
+      <a class="item">
+          <i class="block layout icon"></i> Projects
+      </a>
+      <a class="item">
+          <i class="smile icon"></i> Add new
+      </a>
+      <a (click)="logout()" class="item">
+        <i class="coffee icon"></i> Sign out
+      </a>
+  </sm-sidebar>
+</div>
+<router-outlet></router-outlet>
+
+<div class="bg">
+  <div *ngIf="!(af.auth | async)" class="ui text container">
+    <div class="ui center aligned padded grid">
+      <div class="row">
+        <div class="column">
+            <i class="inverted gray massive world icon"></i>
+        </div>
+      </div>
+      <div class="row">
+          <div class="column">
+            <h1>
+              Diplomat Project Logger
+            </h1>
+            <h1>
+              <div *ngIf="af.auth | async">You are logged in</div>
+              <div *ngIf="!(af.auth | async)">Please log in</div>
+            </h1>
+          </div>
+      </div>
+    </div>
+
+    <div class="loginForm">
+      <form  (ngSubmit)="login()" class="ui form">
+        <div class="field">
+          <sm-input [control]="emailControl" type="email" name="email" placeholder="Email"></sm-input>
+        </div>
+        <div class="field">
+          <sm-input  [control]="passwordControl" type="password" name="Password" placeholder="Password"></sm-input>
+        </div>
+        <button type="submit" class="ui  purple button">Sign in</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>

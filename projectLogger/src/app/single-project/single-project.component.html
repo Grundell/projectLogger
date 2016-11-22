@@ -1,0 +1,127 @@
+<div class="ui container padded">
+  <br/><br/><br/>
+  <sm-segment>
+    <div class="ui clearing basic segment bottom_border">
+        <div class="ui left floated header">
+          {{ (project|async)?.title }}
+          <div class="sub header">
+              {{ (project|async)?.company }}
+          </div>
+        </div>
+        <div class="ui right floated header">
+            <i class="red circle notched icon"></i>
+            <i class="icon yellow radio"></i>
+            <i class="icon green check circle"></i>
+        </div>
+        <!-- TODO: add a devider -->
+    </div>
+  <div class="ui basic segment">
+    <div class="ui grid">
+        <div class="six wide column">
+            <h4 class="ui header">Description</h4>
+              {{ (project|async)?.description }}
+        </div>
+        <div class="one wide column"></div>
+        <div class="three wide column">
+          <h4 class="ui header">
+            Development
+            <div class="sub header">{{ (project|async)?.type.dev }}</div>
+          </h4>
+        </div>
+
+        <div class="three wide column">
+          <h4 class="ui header">
+            SEO
+            <div class="sub header">{{ (project|async)?.type.seo }}</div>
+          </h4>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui header">
+            Project
+            <div class="sub header">{{ (project|async)?.type.project }}</div>
+          </h4>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+
+      <h3> Initial Quote </h3>
+      <table class="ui compact celled definition table">
+        <thead class="full-width">
+          <tr>
+            <th></th>
+            <th>Type</th>
+            <th class="center aligned">Hours</th>
+            <th class="center aligned">Hour Fee</th>
+            <th class="center aligned">Total</th>
+            <th class="center aligned"> Comment </th>
+            <th class="center aligned"> Offert</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="collapsing">
+              <div class="ui fitted slider checkbox">
+                <input type="checkbox"> <label></label>
+              </div>
+            </td>
+            <td>Development</td>
+            <td class="center aligned">{{ (project|async)?.cost.development.hours }}</td>
+            <td class="center aligned">{{ (project|async)?.cost.development.price }}</td>
+            <td class="center aligned">{{ (project|async)?.cost.development.hours * (project|async)?.cost.development.price }} SEK</td>
+            <td class="center aligned warning"><i class="attention icon"></i></td>
+            <td class="center aligned"><i class="file text outline icon"></i></td>
+          </tr>
+          <tr>
+            <td class="collapsing">
+              <div class="ui fitted slider checkbox">
+                <input type="checkbox"> <label></label>
+              </div>
+            </td>
+            <td>SEO</td>
+            <td class="center aligned">{{ (project|async)?.cost.seo.hours }}</td>
+            <td class="center aligned">{{ (project|async)?.cost.seo.price }}</td>
+            <td class="center aligned">{{ (project|async)?.cost.seo.hours * (project|async)?.cost.seo.price }} SEK</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="collapsing">
+              <div class="ui fitted slider checkbox">
+                <input type="checkbox"> <label></label>
+              </div>
+            </td>
+            <td>Project</td>
+            <td class="center aligned">{{ (project|async)?.cost.project.hours }}</td>
+            <td class="center aligned">{{ (project|async)?.cost.project.price }}</td>
+            <td class="center aligned">{{ (project|async)?.cost.project.hours * (project|async)?.cost.project.price }} SEK</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tfoot class="full-width">
+          <tr>
+            <th></th>
+            <th colspan="6">
+              <div class="ui right floated small basic yellow button">
+                {{ ((project|async)?.cost.project.hours * (project|async)?.cost.project.price) + (  (project|async)?.cost.development.hours * (project|async)?.cost.development.price ) + ( (  (project|async)?.cost.seo.hours * (project|async)?.cost.seo.price ) ) }} SEK
+              </div>
+              <div class="ui small  button">
+                Approve
+              </div>
+              <div class="ui small  disabled button">
+                Approve All
+              </div>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </sm-segment>
+  <br/><br/><br/>
+  <sm-segment>
+    <pre>
+      {{project | async | json }}
+    </pre>
+  </sm-segment>
+</div>
